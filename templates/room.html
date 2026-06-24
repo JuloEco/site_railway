@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salon {{ code }} // TANKS</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="scope" data-room-code="{{ code }}">
+
+  <header class="topbar">
+    <div class="brand">
+      <a href="/" class="brand-mark-link" title="Retour à l'accueil"><span class="brand-mark">◢◤</span></a>
+      <h1>TANKS<span class="brand-sub">// SALON <span id="room-code-label">{{ code }}</span></span></h1>
+    </div>
+    <div class="room-share">
+      Code du salon : <b id="room-code-big">{{ code }}</b>
+    </div>
+  </header>
+
+  <!-- ===================== VUE LOBBY ===================== -->
+  <main class="lobby-view" id="lobby-view">
+
+    <section class="lobby-panel">
+      <h2>Joueurs <span id="player-count">(0/4)</span></h2>
+      <ul class="player-list" id="player-list"></ul>
+
+      <form id="form-add-player" class="add-player-form">
+        <input id="input-pseudo" type="text" maxlength="16" placeholder="Pseudo" autocomplete="off">
+        <div class="color-picker" id="color-picker"></div>
+        <button type="submit" class="btn-secondary">AJOUTER</button>
+      </form>
+      <div class="home-inline-error" id="lobby-error" hidden></div>
+    </section>
+
+    <section class="lobby-panel lobby-panel-side">
+      <h2>Scores du salon</h2>
+      <ul class="score-list" id="score-list">
+        <li class="score-empty">Aucune manche jouée pour l'instant.</li>
+      </ul>
+
+      <button id="btn-launch" class="btn-primary btn-launch" disabled>LANCER LA PARTIE</button>
+      <p class="lobby-hint" id="lobby-hint">Il faut au moins 2 joueurs pour lancer.</p>
+    </section>
+
+  </main>
+
+  <!-- ===================== VUE JEU ===================== -->
+  <main class="board" id="game-view" hidden>
+
+    <div class="canvas-wrap">
+      <canvas id="game" width="980" height="540"></canvas>
+
+      <div class="turn-banner" id="turn-banner">
+        AU TOUR DE <span id="turn-name">—</span>
+        <span class="turn-detail" id="turn-detail"></span>
+      </div>
+
+      <div class="wind-gauge" id="wind-gauge">
+        <span class="wind-label">VENT</span>
+        <span class="wind-arrow" id="wind-arrow">→</span>
+        <span class="wind-value" id="wind-value">0</span>
+      </div>
+
+      <div class="overlay" id="overlay" hidden>
+        <div class="overlay-card">
+          <h2 id="overlay-title">VICTOIRE</h2>
+          <p id="overlay-sub">Manche terminée</p>
+          <div class="overlay-actions">
+            <button id="btn-next-round" class="btn-primary">MANCHE SUIVANTE</button>
+            <button id="btn-back-lobby" class="btn-secondary">RETOUR AU SALON</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="overlay" id="overlay-controls" hidden>
+        <div class="overlay-card">
+          <h2>PRÊTS AU COMBAT ?</h2>
+          <p class="rules">
+            Le jeu est au tour par tour : tout le monde utilise les <b>mêmes touches</b>,
+            seul le tank actif réagit.<br><br>
+            ← / → : déplacer · ↑ / ↓ : viser · <b>Espace</b> : maintenir pour charger, relâcher pour tirer
+          </p>
+          <button id="btn-start-match" class="btn-primary">COMMENCER</button>
+        </div>
+      </div>
+    </div>
+
+    <aside class="player-cards" id="player-cards"></aside>
+
+  </main>
+
+  <footer class="legend">
+    <span class="legend-item">← / → déplacer</span>
+    <span class="legend-item">↑ / ↓ viser</span>
+    <span class="legend-item">Espace : charger / tirer</span>
+    <span class="legend-item">Contrôles partagés — au tour par tour</span>
+  </footer>
+
+</div>
+
+<script src="{{ url_for('static', filename='room.js') }}"></script>
+</body>
+</html>
