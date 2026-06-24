@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TANKS PLATFORM</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="home-body">
+
+<div class="home-wrap">
+
+  <div class="brand brand-center">
+    <span class="brand-mark">◢◤</span>
+    <h1>TANKS<span class="brand-sub">// PLATEFORME DE SALONS</span></h1>
+  </div>
+
+  <p class="home-tagline">
+    2 à 4 joueurs, un seul ordinateur, un clavier qui passe de main en main.
+    Crée un salon ou rejoins-en un avec son code.
+  </p>
+
+  {% if error %}
+  <div class="home-error">{{ error }}</div>
+  {% endif %}
+
+  <div class="home-grid">
+
+    <section class="home-card">
+      <h2>Créer un salon</h2>
+      <p class="home-card-sub">Un code à 4 caractères est généré. Note-le si tu veux reprendre la partie plus tard.</p>
+      <button id="btn-create" class="btn-primary">CRÉER UN SALON</button>
+    </section>
+
+    <section class="home-card">
+      <h2>Rejoindre un salon</h2>
+      <p class="home-card-sub">Tu as déjà un code de salon ?</p>
+      <form id="form-join" class="home-join-form">
+        <input id="join-code" type="text" maxlength="4" placeholder="EX. K7QZ" autocomplete="off" spellcheck="false">
+        <button type="submit" class="btn-secondary">REJOINDRE</button>
+      </form>
+      <div class="home-inline-error" id="join-error" hidden></div>
+    </section>
+
+  </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='home.js') }}"></script>
+</body>
+</html>
